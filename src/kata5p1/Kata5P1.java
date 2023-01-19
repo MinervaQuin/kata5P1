@@ -17,6 +17,7 @@ public class Kata5P1 {
         // TODO code application logic hereç
         DBConnection app= new DBConnection();
         app.selectAll();
+        app.createNewTable();
     }
     
 }

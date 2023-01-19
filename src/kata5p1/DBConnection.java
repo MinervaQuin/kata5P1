@@ -44,6 +44,24 @@ public class DBConnection {
 
     }
     
+    public void createNewTable() {
+    // Cadena de conexión SQLite
+        String url = "jdbc:sqlite:mail.db";
+        // Instrucción SQL para crear nueva tabla
+        String sql = "CREATE TABLE IF NOT EXISTS email (\n"
+        + " id integer PRIMARY KEY AUTOINCREMENT,\n"
+        + " direccion text NOT NULL);";
+        try (Connection conn = DriverManager.getConnection(url);
+            Statement stmt = conn.createStatement()) {
+            // Se crea la nueva tabla
+            stmt.execute(sql);
+            System.out.println("Tabla creada");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    
 }
 
 
