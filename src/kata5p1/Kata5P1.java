@@ -4,6 +4,8 @@
  */
 package kata5p1;
 
+import java.util.List;
+
 /**
  *
  * @author Minerva
@@ -18,6 +20,11 @@ public class Kata5P1 {
         DBConnection app= new DBConnection();
         app.selectAll();
         app.createNewTable();
+        
+        String nombre_archivo="emails.txt";
+        List<String> correos=MailListReader.read(nombre_archivo);
+        app.insertEmails(correos);
+        
     }
     
 }

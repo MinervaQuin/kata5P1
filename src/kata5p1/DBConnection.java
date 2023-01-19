@@ -7,7 +7,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 /**
  *
@@ -46,7 +48,7 @@ public class DBConnection {
     
     public void createNewTable() {
     // Cadena de conexión SQLite
-        String url = "jdbc:sqlite:mail.db";
+        String url = "jdbc:sqlite:kata5BD.db";
         // Instrucción SQL para crear nueva tabla
         String sql = "CREATE TABLE IF NOT EXISTS email (\n"
         + " id integer PRIMARY KEY AUTOINCREMENT,\n"
@@ -61,6 +63,21 @@ public class DBConnection {
         }
     }
 
+    public void insertEmails(List<String> emails){
+        
+        for (int i = 0; i < emails.size(); i++) {
+            String sql = "INSERT INTO email(direccion) VALUES(?)";
+            try (Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, emails.get(i));
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+
+            
+        }
+    }
     
 }
 
